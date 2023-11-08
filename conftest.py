@@ -1,22 +1,12 @@
 import pytest
-import random
+from selenium import webdriver
+from urls import Urls
+
 
 @pytest.fixture
-def name():
-    return 'vasia'
+def browser():
+    driver = webdriver.Chrome()
+    driver.get(Urls.MAIN_URL)
 
-@pytest.fixture
-def email():
-    return 'yuliya_levochkina_2@gmail.com'
-
-@pytest.fixture
-def password():
-    return '12345678'
-
-@pytest.fixture
-def inc_password():
-    return '123'
-
-@pytest.fixture
-def emailforreg():
-    return f'vasiaiv{random.randint(100, 999)}@yandex.ru'
+    yield driver
+    driver.quit()
